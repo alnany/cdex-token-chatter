@@ -1,7 +1,7 @@
 {
   "npmName": "cdex-token-chatter",
   "pluginId": "cdex-token-chatter",
-  "repoUrl": null,
+  "repoUrl": "https://github.com/alnany/cdex-token-chatter",
   "tags": [
     "UI",
     "Trading",
@@ -12,5 +12,5 @@
   "storybookTooltip": null,
   "usagePrompt": "Add a live social chatter feed (Reddit + Farcaster + crypto news) to the trading page as a \"Chart | Chatter\" tab switch on the desktop TradingView chart slot.\n\n## Install\n\nnpm install cdex-token-chatter\n\n## Register\n\nimport { OrderlyAppProvider } from \"@orderly.network/react-app\";\nimport { registerTokenChatterPlugin } from \"cdex-token-chatter\";\n\n<OrderlyAppProvider\n  brokerId=\"your-broker-id\"\n  networkId=\"mainnet\"\n  plugins={[registerTokenChatterPlugin()]}\n>\n  <TradingPage />\n</OrderlyAppProvider>\n\n## Options (all optional)\n\nregisterTokenChatterPlugin({\n  accentColor: \"#32c15f\",      // tabs, live dot, \"new\" pill\n  defaultTab: \"chart\",         // or \"chatter\"\n  pollIntervalMs: 45000,        // refresh cadence while Chatter tab is visible\n  footerNote: \"\",              // optional note pinned under the feed\n  gistRawUrl: \"...\",           // self-hosted aggregation cache override\n  resolveSymbol: (props) => \"PERP_BTC_USDC\", // only if your host doesn't pass `symbol` to the chart\n})\n\n## How it works\n\n- Intercepts the `TradingView.Desktop` injectable path. The chart stays mounted at all times (no TradingView remount when switching tabs); polling pauses while the Chatter tab is hidden.\n- Data comes from a public CDN-cached aggregation layer maintained by CDEX (refreshed every 30 minutes, ~125 Orderly perp symbols incl. RWA/stock perps). Responses are CORS-open; the browser fetches directly \u2014 you do NOT need any backend, API key, or proxy.\n- The active symbol is read from the chart's `symbol` prop (`PERP_{BASE}_USDC`). If your host renders the chart without a `symbol` prop, pass `resolveSymbol`.\n- Messages are quality-filtered and merged with per-source quotas (~7 Reddit / ~7 Farcaster / ~6 news), deduplicated, and sorted freshest-first. Symbols with no recent chatter show a friendly empty state.\n\n## Pitfalls\n\n- Desktop only: the interceptor targets `TradingView.Desktop`; mobile layouts are unaffected.\n- The UI is styled inline for dark hosts (the Orderly SDK default). On a light theme, set accentColor and expect reduced contrast.\n- If you self-host the cache (gistRawUrl), keep the file naming contract: reddit-{BASE}.json, farcaster-{BASE}.json, news-{BASE}.json.",
   "createdAt": "2026-07-14T06:26:43.730Z",
-  "updatedAt": "2026-07-14T07:04:22.420398Z"
+  "updatedAt": "2026-07-14T07:05:33.594298Z"
 }

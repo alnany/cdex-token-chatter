@@ -42,5 +42,13 @@
     "react-dom": "^18.2.0",
     "tsup": "^8.5.1",
     "typescript": "^5.1.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alnany/cdex-token-chatter.git"
+  },
+  "homepage": "https://github.com/alnany/cdex-token-chatter#readme",
+  "bugs": {
+    "url": "https://github.com/alnany/cdex-token-chatter/issues"
   }
 }
